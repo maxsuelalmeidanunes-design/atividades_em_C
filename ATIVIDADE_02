@@ -1,0 +1,138 @@
+EXERCICIO_01
+
+#include <stdio.h>
+
+#define VALOR_HORA 10.25
+
+int main(void) {
+    float horas, salario;
+
+    printf("Quantas horas você trabalhou? ");
+    scanf("%f", &horas);
+
+    salario = horas * VALOR_HORA;
+
+    printf("Salário a receber: R$ %.2f\n", salario);
+
+    return 0;
+}
+
+EXERCICIO_02
+
+#include <stdio.h>
+
+#define MEDIA_MINIMA 7.0
+#define TOLERANCIA_FALTAS 15.0  /* percentual da carga horária */
+
+int main(void) {
+    float nota1, nota2, media;
+    int carga_horaria, faltas;
+    float percentual_faltas;
+    int reprovado_nota, reprovado_falta;
+
+    printf("Digite a primeira nota: ");
+    scanf("%f", &nota1);
+    printf("Digite a segunda nota: ");
+    scanf("%f", &nota2);
+    printf("Digite a carga horária do curso (em horas): ");
+    scanf("%d", &carga_horaria);
+    printf("Digite o número de faltas (em horas): ");
+    scanf("%d", &faltas);
+
+    media = (nota1 + nota2) / 2;
+    percentual_faltas = (float) faltas / carga_horaria * 100;
+
+    reprovado_nota  = media < MEDIA_MINIMA;
+    reprovado_falta = percentual_faltas > TOLERANCIA_FALTAS;
+
+    printf("\nMédia: %.2f\n", media);
+    printf("Faltas: %.2f%% da carga horária\n", percentual_faltas);
+
+    if (!reprovado_nota && !reprovado_falta) {
+        printf("Situação: APROVADO\n");
+    } else if (reprovado_nota && reprovado_falta) {
+        printf("Situação: REPROVADO por nota e por faltas\n");
+    } else if (reprovado_nota) {
+        printf("Situação: REPROVADO por nota\n");
+    } else {
+        printf("Situação: REPROVADO por faltas\n");
+    }
+
+    return 0;
+} 
+
+
+EXERCICIO_03
+
+#include <stdio.h>
+#include <string.h>
+
+#define VALE_TRANSPORTE 0.02
+#define VALE_ALIMENTACAO 0.05
+#define PLANO_SAUDE 0.10
+
+/* Lê uma linha do teclado e remove o '\n' final */
+void ler_texto(const char *rotulo, char *destino, int tamanho) {
+    printf("%s", rotulo);
+    fgets(destino, tamanho, stdin);
+    destino[strcspn(destino, "\n")] = '\0';
+}
+
+int main(void) {
+    int qtd, i, idade;
+    char nome[60], endereco[100], cidade[40], estado[3];
+    char sexo;
+    float bruto, vt, va, ps, liquido;
+
+    printf("Quantos funcionários deseja cadastrar? ");
+    scanf("%d", &qtd);
+    getchar(); /* consome o '\n' deixado pelo scanf */
+
+    for (i = 1; i <= qtd; i++) {
+        printf("\n=== Funcionário %d ===\n", i);
+
+        ler_texto("Nome: ", nome, sizeof(nome));
+        ler_texto("Endereço: ", endereco, sizeof(endereco));
+
+        printf("Sexo (M/F): ");
+        scanf(" %c", &sexo);
+        getchar();
+
+        ler_texto("Cidade: ", cidade, sizeof(cidade));
+        ler_texto("Estado (UF): ", estado, sizeof(estado));
+        /* se digitar mais de 2 letras, descarta o excesso */
+        if (strlen(estado) == 2 && getchar() != '\n') {
+            while (getchar() != '\n');
+        }
+
+        printf("Idade: ");
+        scanf("%d", &idade);
+
+        printf("Salário bruto: R$ ");
+        scanf("%f", &bruto);
+        getchar();
+
+        vt = bruto * VALE_TRANSPORTE;
+        va = bruto * VALE_ALIMENTACAO;
+        ps = bruto * PLANO_SAUDE;
+        liquido = bruto - vt - va - ps;
+
+        printf("\n--- Ficha do funcionário ---\n");
+        printf("Nome:      %s\n", nome);
+        printf("Endereço:  %s\n", endereco);
+        printf("Sexo:      %c\n", sexo);
+        printf("Cidade/UF: %s/%s\n", cidade, estado);
+        printf("Idade:     %d anos\n", idade);
+        printf("Salário bruto:          R$ %.2f\n", bruto);
+        printf("Vale Transporte (2%%):   R$ %.2f\n", vt);
+        printf("Vale Alimentação (5%%):  R$ %.2f\n", va);
+        printf("Plano de Saúde (10%%):   R$ %.2f\n", ps);
+        printf("Salário líquido:        R$ %.2f\n", liquido);
+    }
+
+    return 0;
+}
+
+NOME: MAXSUEL ALMEIDA NUNES  
+RGM: 480011436 
+DATA: 20/08/2026
