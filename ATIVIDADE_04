@@ -1,0 +1,65 @@
+#include <stdio.h>
+
+
+
+#define TAXA_SERVIÇO 0.10
+
+
+
+int main()
+
+{
+
+  float consumo, taxa, total, porPessoas;
+
+  int pessoas;
+
+   
+
+  printf("Informe o valor total do consumo (R$): ");
+
+  scanf("%f", &consumo);
+
+  printf("Informe o numero de pessoas na mesa: ");
+
+  scanf("%d", &pessoas);
+
+   
+
+  taxa = consumo * TAXA_SERVIÇO;
+
+  total = consumo + taxa;
+
+  porPessoas = total / pessoas;
+
+   
+
+  printf("Valor do consumo      : R$ %.2f\n", consumo);
+
+  printf("Valor por pessoa      : R$ %.2f\n", porPessoas);
+
+  printf("Valor da taxa        : R$ %.2f\n", taxa);
+
+  printf("Valor do total       : R$ %.2f\n", total);
+
+   
+
+  printf("==================================================\n");
+
+   
+
+   
+
+   
+
+  return 0;
+
+}
+
+
+
+
+
+NOME: MAXSUEL ALMEIDA NUNES  
+RGM: 480011436 
+DATA: 23/09/2026
